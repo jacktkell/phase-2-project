@@ -3,9 +3,16 @@ import { useEffect, useState } from 'react';
 // dependencies
 import { Typography } from '@material-ui/core';
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+import TableFooter from '@material-ui/core/TableFooter';
 
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from 'react-router-dom';
 
 // components to import
 import useStyles from './styles';
@@ -13,6 +20,7 @@ import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
 import Gallery from './Gallery';
+import Details from './pages/Details';
 
 const App = () => {
   const classes = useStyles();
@@ -32,6 +40,9 @@ const App = () => {
     <ScopedCssBaseline>
       <div className={classes.rootApp}>
         <Router>
+          <Route path='/details/:id' component={Details} strict>
+            <Details images={images} results={images.id} key={images.id} />
+          </Route>
           <Nav />
           <Switch>
             <Route path='/home' component={Home} strict />
@@ -41,7 +52,6 @@ const App = () => {
             <Route path='/login' component={Login} strict />
           </Switch>
         </Router>
-
         <footer className={classes.footer}>
           <Typography variant='h6' align='center' gutterBottom>
             Franklin Sahlhoff | Jack Kelling

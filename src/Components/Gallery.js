@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useStyles from './styles';
 import {
   Button,
@@ -11,8 +11,18 @@ import {
   Container,
 } from '@material-ui/core';
 
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+// components
+import Details from './pages/Details';
+
 const Gallery = ({ images, results, key }) => {
   const classes = useStyles();
+
+  const routes = [`'/details/:id'`];
+
+  console.log(images);
+
   return (
     <>
       <Container className={classes.cardGrid} maxWidth='md'>
@@ -27,15 +37,24 @@ const Gallery = ({ images, results, key }) => {
                 />
                 <CardContent className={classes.cardContent}>
                   <Typography gutterBottom variant='h5'></Typography>
-                  <Typography>{image.description}</Typography>
+                  <Typography></Typography>
                 </CardContent>
+
                 <CardActions>
-                  <Button size='small' color='primary'>
-                    enlarge
-                  </Button>
-                  <Button size='small' color='primary'>
-                    details
-                  </Button>
+                  <Route path='/'>
+                    <Button size='small' color='primary'>
+                      enlarge
+                    </Button>
+                    <Button
+                      size='small'
+                      color='primary'
+                      value={routes[0]}
+                      to={routes[0]}
+                      component={Link}
+                    >
+                      details
+                    </Button>
+                  </Route>
                 </CardActions>
               </Card>
             </Grid>

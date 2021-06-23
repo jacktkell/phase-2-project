@@ -2,8 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    // backgroundColor: theme.palette.background.paper,
+    // backgroundColor: 'black',
     padding: theme.spacing(8, 0, 6),
+    // height: '100vh',
+    // backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/film.jpeg'})`,
+    // backgroundRepeat: 'no-repeat',
+    // backgroundSize: 'cover',
   },
   // icon: {
   //   marginRight: '20px',
@@ -25,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: '1',
   },
+  appbar: {
+    backgroundColor: 'black',
+  },
   // footer: {
   //   backgroundColor: theme.palette.background.paper,
   //   padding: '50px 0',
@@ -33,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
   //   flexGrow: 1,
   //   backgroundColor: theme.palette.background.paper,
   // },
-  // rootApp: {
-  //   height: '100vh',
-  //   backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/film.jpeg'})`,
-  //   backgroundRepeat: 'no-repeat',
-  //   backgroundSize: 'cover',
-  // },
+  rootApp: {
+    height: '100vh',
+    backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/film.jpeg'})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+  },
 }));
 
 export default useStyles;

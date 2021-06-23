@@ -3,17 +3,11 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 //component
 // import Home from './Home';
-import Login from './Login';
-import Gallery from './Gallery';
-// import useStyles from './styles';
-import Home from './Home';
 import useStyles from './styles';
 
 const Nav = () => {

@@ -18,7 +18,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 //components
 import useStyles from './stylelogin';
 
-export default function SignUp() {
+export default function Login() {
   const classes = useStyles();
 
   return (
