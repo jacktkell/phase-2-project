@@ -1,113 +1,57 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 //component
-import AlbumContainer from './AlbumContainer';
-
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+// import Home from './Home';
+import Login from './Login';
+import Gallery from './Gallery';
+// import useStyles from './styles';
+import Home from './Home';
+import useStyles from './styles';
 
 const Nav = () => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const routes = ['/home', '/gallery', '/login'];
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AppBar position='static'>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label='simple tabs example'
-        >
-          <Tab label='Item One' {...a11yProps(0)} />
-          <Tab label='Item Two' {...a11yProps(1)} />
-          <Tab label='Item Three' {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <main>
-          {' '}
-          <AlbumContainer />
-        </main>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+    <div className={classes.root2}>
+      <Route
+        path='/'
+        render={(history) => (
+          <AppBar className={classes.appbar}>
+            <Tabs value={history.location.pathname}>
+              <Tab
+                label='Home'
+                value={routes[0]}
+                component={Link}
+                to={routes[0]}
+              />
+              <Tab
+                label='Gallery'
+                value={routes[1]}
+                component={Link}
+                to={routes[1]}
+              />
+              <Tab
+                label='Login'
+                value={routes[2]}
+                component={Link}
+                to={routes[2]}
+              />
+            </Tabs>
+          </AppBar>
+        )}
+      />
     </div>
   );
 };
 
 export default Nav;
-
-// import React from 'react';
-
-// // dependencies
-// import useStyles from './styles';
-// import { AppBar, Toolbar, Typography } from '@material-ui/core';
-// import { PhotoCamera } from '@material-ui/icons';
-
-// const Nav = () => {
-//   const classes = useStyles();
-//   return (
-//     <div>
-//       <AppBar position='relative'>
-//         <Toolbar>
-//           <PhotoCamera className={classes.icon} />
-//           <Typography variant='h6'>Film - </Typography>
-//         </Toolbar>{' '}
-//       </AppBar>
-//     </div>
-//   );
-// };
-
-// export default Nav;

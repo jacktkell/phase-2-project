@@ -11,10 +11,10 @@ import {
   Container,
 } from '@material-ui/core';
 
-const Cards = ({ images, results }) => {
+const Gallery = ({ images, results, key }) => {
   const classes = useStyles();
   return (
-    <div>
+    <>
       <Container className={classes.cardGrid} maxWidth='md'>
         <Grid container spacing={4}>
           {images.map((image) => (
@@ -42,8 +42,8 @@ const Cards = ({ images, results }) => {
           ))}
         </Grid>
       </Container>
-    </div>
+    </>
   );
 };
 
-export default Cards;
+export default Gallery;
