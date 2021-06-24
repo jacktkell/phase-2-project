@@ -20,7 +20,7 @@ const Nav = () => {
       <Route
         path='/'
         render={(history) => (
-          <AppBar className={classes.appbar}>
+          <AppBar className={classes.appBar}>
             <Tabs value={history.location.pathname}>
               <Tab
                 label='Home'

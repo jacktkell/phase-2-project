@@ -7,60 +7,64 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography,
   Container,
 } from '@material-ui/core';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
+
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 // components
-import Details from './pages/Details';
 
 const Gallery = ({ images, results, key }) => {
   const classes = useStyles();
 
-  const routes = [`'/details/:id'`];
+  const routes = [`/details/:id`];
 
   console.log(images);
 
   return (
     <>
-      <Container className={classes.cardGrid} maxWidth='md'>
-        <Grid container spacing={4}>
-          {images.map((image) => (
-            <Grid results={results} key={image.id} xs={12} sm={6} md={4} item>
-              <Card className={classes.cardGrid} maxwidth='md'>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image={image.assets.large.url}
-                  title='Image title'
-                />
-                <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant='h5'></Typography>
-                  <Typography></Typography>
-                </CardContent>
+      <ScopedCssBaseline>
+        <Container className={classes.cardGrid} maxWidth='md'>
+          <Grid container spacing={1}>
+            {images.map((image) => (
+              <Grid
+                results={results}
+                key={image.id}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                item
+              >
+                <Card className={classes.cardGrid} maxwidth='lg'>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={image.assets.large.url}
+                    title={image.title}
+                  />
+                  <CardContent className={classes.cardContent}></CardContent>
 
-                <CardActions>
-                  <Route path='/'>
-                    <Button size='small' color='primary'>
-                      enlarge
-                    </Button>
-                    <Button
-                      size='small'
-                      color='primary'
-                      value={routes[0]}
-                      to={routes[0]}
-                      component={Link}
-                    >
-                      details
-                    </Button>
-                  </Route>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+                  <CardActions>
+                    <Route path='/'>
+                      <Button
+                        size='small'
+                        color='primary'
+                        value={routes[0]}
+                        to={`/details/${image.id}`}
+                        component={Link}
+                      >
+                        details
+                      </Button>
+                    </Route>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </ScopedCssBaseline>
     </>
   );
 };

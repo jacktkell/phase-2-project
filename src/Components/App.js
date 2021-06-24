@@ -1,30 +1,25 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 // dependencies
-import { Typography } from '@material-ui/core';
+
 import ScopedCssBaseline from '@material-ui/core/ScopedCssBaseline';
-import TableFooter from '@material-ui/core/TableFooter';
 
 import axios from 'axios';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // components to import
 import useStyles from './styles';
 import Nav from './Nav';
 import Home from './Home';
 import Login from './Login';
-import Gallery from './Gallery';
 import Details from './pages/Details';
+import Gallery from './Gallery';
+import Footer from './Footer';
 
 const App = () => {
   const classes = useStyles();
 
+  // state
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -37,31 +32,35 @@ const App = () => {
   }, []);
 
   return (
-    <ScopedCssBaseline>
-      <div className={classes.rootApp}>
-        <Router>
-          <Route path='/details/:id' component={Details} strict>
-            <Details images={images} results={images.id} key={images.id} />
-          </Route>
-          <Nav />
-          <Switch>
-            <Route path='/home' component={Home} strict />
-            <Route path='/gallery' component={Gallery} strict>
-              <Gallery images={images} results={images.id} key={images.id} />
-            </Route>
-            <Route path='/login' component={Login} strict />
-          </Switch>
-        </Router>
-        <footer className={classes.footer}>
-          <Typography variant='h6' align='center' gutterBottom>
-            Franklin Sahlhoff | Jack Kelling
-          </Typography>
-          <Typography variant='subtitle1' align='center' color='textSecondary'>
-            LINKS TO SOCIAL MEDIA
-          </Typography>
-        </footer>
-      </div>
-    </ScopedCssBaseline>
+    <>
+      <ScopedCssBaseline>
+        <div className={classes.rootApp}>
+          <Router>
+            <Route
+              path='/details/:id'
+              render={(props) => {
+                const imageId = props.match.params.id;
+                const detailImg = images.find((element) => {
+                  return element.id == imageId;
+                });
+
+                return <Details detailImg={detailImg} />;
+              }}
+              strict
+            ></Route>
+            <Nav />
+            <Switch>
+              <Route path='/home' component={Home} strict />
+              <Route path='/gallery' component={Gallery} strict>
+                <Gallery images={images} results={images.id} key={images.id} />
+              </Route>
+              <Route path='/login' component={Login} strict />
+            </Switch>
+          </Router>
+        </div>
+        <Footer />
+      </ScopedCssBaseline>
+    </>
   );
 };
 
